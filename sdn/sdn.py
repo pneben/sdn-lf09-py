@@ -26,8 +26,11 @@ methodSelection = [
 def main():
     '''Main entry of program'''
     running = True
-    credentials = inquirer.prompt(credentialsQuestions)
-    service_ticket = get_ticket.run(credentials["username"], credentials["password"])
+    service_ticket = None
+
+    while service_ticket is None or len(service_ticket) == 0:
+        credentials = inquirer.prompt(credentialsQuestions)
+        service_ticket = get_ticket.run(credentials["username"], credentials["password"])
 
     while running:
         answers = inquirer.prompt(methodSelection)

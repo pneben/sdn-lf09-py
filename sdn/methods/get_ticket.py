@@ -16,6 +16,10 @@ def run(username, password):
       "password": password,
     }
     resp = requests.post(URL, json.dumps(body), headers=headers, verify=False)
+    if resp.status_code == 401:
+      print("\nDie Einlogdaten sind falsch\n")
+      return
+
     response_json = resp.json()
     service_ticket = response_json["response"]["serviceTicket"]
 
